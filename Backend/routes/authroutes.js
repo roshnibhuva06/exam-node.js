@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../model/usermodel");
+const { register, login } = require("../controllers/authController");
 
-router.post("/register", async (req,res)=>{
-  await User.create(req.body);
-  res.redirect("/login");
-});
+router.post("/register", register);
 
-
-router.get("/logout",(req,res)=>{
-  res.clearCookie("token");
-  res.redirect("/login");
-});
+router.post("/login", login);
 
 module.exports = router;
